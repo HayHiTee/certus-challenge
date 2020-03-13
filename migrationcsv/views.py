@@ -1,5 +1,5 @@
 import pdfkit
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.exceptions import ValidationError
 from django.http import JsonResponse, Http404, HttpResponseNotFound
 from django.views.decorators.csrf import csrf_exempt
@@ -36,6 +36,9 @@ def html_to_pdf_view(request, pk):
     else:
 
         return HttpResponseNotFound('Format Type not Supported')
+
+
+
 
 
 class AppSecView(generic.ListView):

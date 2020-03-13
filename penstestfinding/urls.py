@@ -17,7 +17,10 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 
+from penstestfinding.views import home_view
+
 urlpatterns = [
+    path('', home_view, name='home'),
     path('appsec/', include('migrationcsv.urls')),
     path('passwordvault/', include('passwordvault.urls')),
     path('admin/', admin.site.urls),
