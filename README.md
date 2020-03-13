@@ -67,6 +67,10 @@ Once selected end user should have an option to download selected findings (only
 
 8. Log in to [admin](http://127.0.0.1:8000/admin/) with the username and password created in 6. 
 
+9. To Run Test
+     ```bash
+    python manage.py test
+    ```
 
 ### Usage
 * Findings API [documentation](http://127.0.0.1:8000/findings/api/v1/redoc/)
