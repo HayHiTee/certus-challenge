@@ -8,7 +8,7 @@ class Findings(models.Model):
     description = models.TextField()
     solution = models.TextField()
     author = models.TextField(default="Swapnil Deshmukh")
-    date_last_edited = models.DateField(default=timezone.now().date())
+    date_last_edited = models.DateField(auto_now_add=True)
     website = models.URLField(default='')
     reviwed_by = models.TextField(default="Swapnil Deshmukh")
 
