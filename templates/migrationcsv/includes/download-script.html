@@ -1,0 +1,14 @@
+<a id="download-link" href="" hidden>Download file</a>
+
+<script>
+    $(document).ready(function () {
+        $('#download-btn-id').on('click', function () {
+            var url = "{% url  "download-pdf" object.pk %}";
+            url = url.concat("?format=", $('input[name="download-format"]:checked').val());
+            $("#download-link").attr("href", url);
+            $('#download-link').get(0).click();
+
+        });
+    });
+
+</script>

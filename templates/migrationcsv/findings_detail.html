@@ -1,0 +1,64 @@
+{% extends parent_template|default:"migrationcsv/base.html" %}{% load static %}{% block main %}
+    <section class="section-panel dark-panel simple-banner-small">
+        <div class="container">
+        </div>
+    </section>
+
+    <section class="section-panel white-panel blog-article">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10">
+                    <!-- Tab panes -->
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="press" role="tabpanel">
+                            <div class="col-sm-10">
+                                <div class="download-file">
+                                    <button id="download-btn-id" class="download-btn"><i class="fa fa-download"> </i>
+                                        Download
+                                    </button>
+                                    <span class="pull-right">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="download-format" value="PDF" checked> PDF
+                                    </label>
+
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="download-format" value="HTML"> HTML
+                                    </label>
+                                        </span>
+
+                                </div>
+                                <div class="press_header">
+                                    {{ object.date_last_edited }}
+                                    <span class="author"
+                                          style="color:#404040;padding-left:4px;">{{ object.reviwed_by }}</span>
+                                </div>
+                                <div class="info">
+                                    <h3 style="font-size:32px;">
+                                        {{ object.finding_name }}
+                                    </h3>
+                                    <div class="truncate-text">
+                                        <p><b>Description</b></p>
+                                        <p>{{ object.description }}</p>
+                                        <br/>
+                                    </div>
+                                    <div class="truncate-text">
+                                        <p><b>Remediation</b></p>
+                                        <p>{{ object.solution }}</p>
+                                        <br/>
+                                    </div>
+                                    <div class="truncate-text">
+                                        <p><b>Website</b></p>
+                                        <p>{{ object.website }}</p>
+                                        <br/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'migrationcsv/includes/download-script.html' %}
+    </section>
+{% endblock %}

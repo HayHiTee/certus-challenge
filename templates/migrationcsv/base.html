@@ -1,0 +1,151 @@
+{% load i18n static %}{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<!DOCTYPE html>
+<html lang="{{LANGUAGE_CODE|default:"en-us"}}"{% if LANGUAGE_BIDI %}dir="rtl"{% endif %}itemscope itemtype="https://schema.org/SoftwareApplication">
+
+<head>
+   <title>Certus Cybersecurity | Information Security Services</title>
+   <link rel="stylesheet" href="{% static "css/jquery-ui.css" %}"/>
+   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+   <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+   <link href="{% static "css/style.css" %}" rel="stylesheet">
+   <noscript><link href="{% static "css/noscript.css" %}" rel="stylesheet"/></noscript>
+
+   <meta itemprop="name" content="Certus Cybersecurity | Information Security Services">
+   <meta itemprop="description" content="Certus Cybersecurity safeguards businesses from data breach with cutting-edge technology, compliance and deep software security expertise">
+   <meta itemprop="image" content="{%static "/img/logo-dark2.png" %}">
+
+   <meta name="twitter:card" content="{%static "/img/logo-dark3.png" %}">
+   <meta name="twitter:site" content="@certuscyber">
+   <meta name="twitter:title" content="Certus Cybersecurity | Information Security Services">
+   <meta name="twitter:description" content="Certus Cybersecurity | Information Security Services">
+   <meta name="twitter:creator" content="@certuscyber">
+   <meta name="twitter:image:src" content="{%static "/img/logo-dark4.png" %}">
+
+   <meta property="og:title" content="Certus Cybersecurity | Information Security Services"/>
+   <meta property="og:url" content="http://www.certuscyber.com/"/>
+   <meta property="og:image" content="{%static "/img/logo-dark5.png" %}"/>
+   <meta property="og:description" content="Certus Cybersecurity safeguards businesses from data breach with cutting-edge technology, compliance and deep software security expertise"/>
+   <meta property="og:site_name" content="Certus Cybersecurity"/>
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <script src="{% static "js/custom.js" %}"></script>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+   <meta name="title" content="Certus Cybersecurity | Information Security Services">
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="description" content="Certus Cybersecurity safeguards businesses from data breach with cutting-edge technology, compliance and deep software security expertise">
+   <meta name="keywords" content="cybersecurity, Certus, data breach, board communication, cybersecurity, software security, compliance">
+   {% block extrahead %}
+   {% endblock %}
+
+   <link rel="canonical" href="https://www.certuscyber.com"/>
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+   <meta property="og:title" content="Certus Cybersecurity | Information Security Services"/>
+   <meta property="og:description" content="Certus safeguards businesses from data breach with cutting-edge technology and deep software security expertise"/>
+   <meta property="og:image" content="{%static "/img/logo-dark1.png" %}"/>
+   <meta property="og:type" content="Website"/>
+   <link rel="home" href="https://www.certuscyber.com"/>
+   <link rel="shortcut icon" type="image/png" href="{%static "/img/favicon.ico" %}"/>
+   <link href="" rel="stylesheet">
+   <link rel=”apple-touch-icon” href="{%static "/img/favicon.ico" %}">
+</head>
+
+<body class="body-wrapper changeHeader">
+   <main class="main-wrapper">
+      <header>
+         <nav class="navbar navbar-default navbar-main navbar-fixed-top " role="navigation">
+            <div class="container">
+               <div class="navbar-header">
+                  <div id="mobile_nav_menu" style="display:none;">
+                     <button id="mobile_nav_close" role="button" class="mobile-toggle"> <i class="glyphicon glyphicon glyphicon-minus"></i> </button>
+                     <ul class="mobile-nav">
+                        <li><a href="/appsec/findings/">Pentest Home</a></li>
+                        <li><a href="/about"></a>Password Vault</li>
+                        <li><a href="/contact-us">Policies</a></li>
+                     </ul>
+                  </div>
+                  <a class="navbar-brand" href="/"></a>
+               </div>
+               <div class="collapse navbar-collapse navbar-ex1-collapse">
+                  <ul class="nav navbar-nav navbar-right">
+                     <li class=""> <a href="/appsec/findings/" class="weight-bold" role="button" aria-haspopup="true" aria-expanded="false">Application Security Home</a></li>
+                     <li class=""> <a href="/about" class="weight-bold" role="button" aria-haspopup="true" aria-expanded="false">Password Vault</a></li>
+                     <li class=""> <a href="/insights" class="weight-bold" role="button" aria-expanded="false">Policies</a></li>
+
+                  </ul>
+               </div>
+            </div>
+         </nav>
+      </header>
+      {% block main %}{% endblock main %}
+      <section class="section-panel dark-panel footer-panel">
+         <div class="container">
+            <div class="row">
+               <div class="col-xs-3 address-col col-w768-w100 ">
+                  <div class="footer-col-wrapper">
+                     <h3>Redwood City</h3>
+                     <p> Certus Cybersecurity Solutions LLC
+                        <br>303 Twin Dolphin Drive, Suite 1100
+                        <br>Redwood City, CA 94065
+                     </p>
+                     <p>+1.877.905.0975</p>
+                  </div>
+               </div>
+               <div class="col-xs-3 address-col col-w768-w100 ">
+                  <div class="footer-col-wrapper">
+                     <h3>Seattle</h3>
+                     <p> Certus Cybersecurity Solutions LLC
+                        <br>1601 5th Avenue, Suite 1100
+                        <br>Seattle, WA 98101
+                     </p>
+                     <p>+1.877.905.0975</p>
+                  </div>
+               </div>
+               <div class="col-xs-3 address-col col-w768-w100 ">
+                  <div class="footer-col-wrapper">
+                     <h3>Munich</h3>
+                     <p> Certus Cybersecurity Solutions GmbH
+                        <br>Leopoldstrasse 23, 5. Etage
+                        <br>80802 Munich, Germany</p>
+                        <p>+49.711.4906.6996</p>
+                  </div>
+               </div>
+               <div class="col-xs-3 col-w768-w100 ">
+                  <div class="footer-col-wrapper">
+                     <div class="social-media">
+                        <h3>Follow Us</h3>
+                        <ul class="list-inline">
+                           <li> <a href="https://twitter.com/certuscyber" target="_blank"> <i class="fa fa-twitter" aria-hidden="true"></i> </a> </li>
+                           <li> <a href="https://fb.me/CertusCyber" target="_blank"> <i class="fa fa-facebook-official" aria-hidden="true"></i> </a> </li>
+                           <li> <a href="https://www.linkedin.com/company/certus-cybersecurity-solutions-llc/" target="_blank"> <i class="fa fa-linkedin" aria-hidden="true"></i> </a> </li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xs-3 col-w768-w100 ">
+                  <div class="footer-col-wrapper"> </div>
+               </div>
+            </div>
+         </div>
+         </div></div>
+      </section>
+      <section class="section-panel white-panel footer-panel">
+         <div class="container">
+            <div class="row">
+               <div class="col-xs-6 col-w768-w100">
+                  <ul class="list-inline">
+                     <li><a href="/about"><b>Company</b></a></li>
+                     <li><a href="/contact-us"><b>Contact</b></a></li>
+                     <li><a href="/privacy"><b>Privacy</b></a></li>
+                  </ul>
+               </div>
+               <div class="col-xs-6 copyright col-w768-w100 "> Copyright 2019 © Certus Cybersecurity Solutions LLC. All rights reserved. </div>
+            </div>
+         </div>
+      </section>
+   </main>
+</body>

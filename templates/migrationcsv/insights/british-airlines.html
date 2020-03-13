@@ -1,0 +1,76 @@
+{% extends parent_template|default:"migrationcsv/base.html" %}{% load static %}{% block main %}
+<section class="section-panel dark-panel simple-banner-small">
+   <div class="container">
+   </div>
+</section>
+<section class="section-panel white-panel blog-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8  blog-header-row">
+        <div class="blog-header">
+          <div class="blog-post-date">
+            September 26, 2018
+          </div>
+          <h3>British Airways Data Breach: How Hackers Might Have Gotten in and What Businesses Can Do to Protect Themselves</h3>
+          <br/>
+          <figure>
+            <img src="{% static "img/blogs/certus-british-airlines.jpeg" %}">
+          </figure>
+        </div>
+        <div class="blog-entry">
+          <p>
+            On September 6, 2018, British Airways disclosed that the company had suffered a data breach that affected the personal and financial data of approximately 382,000 customers. Individuals that had used BA’s web or mobile app to make or modify a booking between August 21 and September 5 were impacted. In the aftermath of the breach, BA now faces consumer opprobrium and the potential for significant regulatory consequences. While BA has revealed no details of how the intrusion occurred, Certus Cybersecurity Solutions has developed a theory of how the hackers breached the company. Our conclusions regarding the BA intrusion hold valuable lessons about the actions companies need to take to protect themselves against similar data breaches.
+          </p>
+          <p>
+           Authorities, including the police and the UK Information Commissioner’s Office, are actively investigating the breach. If BA is found to have violated EU data protection laws, the airline could be fined up to 4% of its total annual worldwide turnover. As the BA breach demonstrates, the financial toll associated with a major data breach has never been higher, and the case for investing to build cybersecurity capability has never been stronger.
+         </p>
+         <p>
+            It is possible to make inferences about the steps taken by the BA hackers, since the attack appears to have been confined to payment card information entered on BA’s web and mobile sites, and did not impact PayPal transactions, third-party booking, or telephone payments. During our investigation, one of the first things we observed, was that BA’s web and mobile applications have not been updated following the breach — actions which one would expect to see if a misconfiguration of the applications themselves had caused the intrusion. Therefore, we can deduce that some other component of BA’s source code, such as the Application Programming Interfaces (APIs), which facilitate communication between apps, may have resulted in the breach.
+          </p>
+          <p>
+            Following this logic, we looked at the APIs used on BA’s checkout page. Since the last update to the company’s mobile application occurred pre-breach, we can conclude that the mobile application was not impacted — if it was, BA would have performed an update as soon as the breach was discovered. We found two payment-related API calls, or requests for information, to a BA API labeled “Orders” and another to a “webdata” subdomain hosted at iag.cloud (IAG is the parent holding group of BA). The “Orders” API call was frequently used to send PayPal and credit card transactions. However, the call to the “webdata” subdomain was not. From this fact, we can deduce that the “Orders” API was not impacted by the data breach, but that the “webdata” subdomain was potentially misconfigured and abused.
+            </p>
+            <p>
+            Taking a closer look at the “webdata” subdomain, we discovered that it was an Amazon Web Services-hosted web app, that sends POST data with sensitive payment card information. This domain is apparently used by British Airways for business intelligence and analytics. We suspect the “webdata” subdomain is where the attackers were able to exfiltrate the sensitive information of 382,000 BA customers.
+            </p>
+            <p>
+            Underlining the risk facing businesses of all types, a similar breach was reported by Ticketmaster in June of 2018. The ticket-selling giant revealed that customers had their payment data compromised because Ticketmaster’s website was sharing payment card information with Inbenta.com, an AI-enabled software company, whose customer support APIs had been exploited by hackers.
+            </p>
+            <p>
+            So, now the big question is how leading companies can better protect their customers against attacks exploiting web and API misconfigurations. Companies should start with a close re-evaluation of their entire software supply chain. This includes cloud infrastructure, configuration management, identity and access management, and web asset management. With deep expertise in securing applications and infrastructure for Fortune 500 companies, Certus Cybersecurity Solutions has a track record of effectively securing the software development lifecycle (SDLC) of its clients at DevOps speed.
+            </p>
+            <p>
+            Companies are actively adopting DevOps as a software development approach and releasing code at an increasingly rapid pace. However, too often, these companies are failing to effectively integrate security with DevOps. We believe these breaches could be prevented through more effective fusion of security processes with DevOps, including cultural transformation, automation and earlier integration of security into the software development lifecycle. With the consequences for data breaches continuing to increase, now is the time for organizations to make a change.
+            </p>
+
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="blogroll-sidebar">
+          <div class="blog-recent-posts">
+            <h4>Recent Posts:</h4>
+            <ol>
+              <li>
+                <a href="cloud-security/" style="display:block;">Cloud security: What every tech leader needs to know</a>
+              </li>
+              <li>
+                <a href="apple-card/" style="display:block;">Deconstructing Apple Card: A Hacker’s Perspective</a>
+              </li>
+              <li>
+                <a href="medtronic/" style="display:block;">Critical Medtronic heart device flaws show need for Internet of Things (IoT) security</a>
+              </li>
+              <li>
+                <a href="citrix/" style="display:block;">Citrix Just Suffered a Massive Data Breach. Here’s How to Protect Your Company from Similar Attacks</a>
+              </li>
+              <li>
+                <a href="fintech/" style="display:block;">Cybersecurity: Ten Things Fintech Leaders Need to Know</a>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+

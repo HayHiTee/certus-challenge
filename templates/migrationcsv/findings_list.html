@@ -1,0 +1,62 @@
+{% extends parent_template|default:"migrationcsv/base.html" %}{% load static %}{% block main %}
+<section class="section-panel dark-panel simple-banner-small">
+   <div class="container">
+   </div>
+</section>
+<nav id="press-nav" class="">
+   <div class="container">
+      <ul class="nav nav-tabs" role="tablist">
+         <li class="nav-item active">
+            <a class="nav-link" data-toggle="tab" href="#press" role="tab" aria-expanded="true">Findings</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#resources" role="tab" aria-expanded="false">CVSS Score</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#resources" role="tab" aria-expanded="false">Test Plan</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#resources" role="tab" aria-expanded="false">Methodology</a>
+         </li>
+         <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#resources" role="tab" aria-expanded="false">Tools</a>
+         </li>
+      </ul>
+   </div>
+</nav>
+
+<section class="section-panel white-panel">
+   <div class="container">
+      <div class="row">
+         <div class="col-sm-1"></div>
+
+         <div class="col-sm-10">
+         <!-- Tab panes -->
+            <div class="tab-content">
+               {% for findings in object_list %}
+               <div class="tab-pane fade in active" id="press" role="tabpanel">
+                  <div class="row press-item" style="padding: 30px 0;border-bottom: 2px solid #0076FF">
+                  <div class="col-sm-10">
+                     <div class="press_header">
+                        {{ findings.date_last_edited }}
+                        <span class="author" style="color:#404040;padding-left:4px;">{{ findings.reviwed_by }}</span>
+                     </div>
+                     <div class="info">
+                        <h4 style="font-size:32px;"><a href="{% url 'findings-detail' findings.id %}">{{ findings.finding_name }}</a></h4>
+                                        <div class="truncate-text"><p>{{ findings.description }}</p></div>
+                     </div>
+                  </div>
+                  </div>
+               </div>
+               {% empty %}
+               <p>No findings yet.</p>
+               {% endfor %}
+
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+
+{% endblock %}

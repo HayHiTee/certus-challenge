@@ -1,0 +1,146 @@
+{% extends parent_template|default:"migrationcsv/base.html" %}{% load static %}{% block main %}
+<section class="section-panel dark-panel simple-banner-small">
+   <div class="container">
+   </div>
+</section>
+<section class="section-panel white-panel blog-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8  blog-header-row">
+        <div class="blog-header">
+          <div class="blog-post-date">
+            May 8, 2019
+          </div>
+          <h3>Cloud security: What every tech leader needs to know</h3>
+          <br/>
+          <figure>
+            <img src="{% static "img/blogs/cloud-security-certuscyber.png" %}">
+          </figure>
+        </div>
+        <div class="blog-entry">
+          <p>
+            Enterprises that move to the cloud enjoy clear benefits — namely redundancy, cost savings and easy integrations — but the challenges and security risks that come with hosting applications in the cloud are numerous as well. Among CTOs and CISOs there is unease with the lack of visibility; worry about the potential for data exfiltration by internal or external threat actors; and concerns about compliance. The issues don’t end there. We also find that rather than truly integrating security and compliance in the cloud, security often remains an afterthought, with organizations bolting-on traditional on-premise security controls in a piecemeal fashion. Companies need a more proactive and comprehensive approach in order to achieve the right levels of control implementation, coverage and maturity across all areas critical to effective cloud security.
+          </p>
+          <p>
+            This is the first in a series of articles setting forth our views on how enterprises can more effectively protect information in the cloud. The following best practices and insights are informed by our experiences protecting Fortune 100 enterprises from data breach and should be top of mind as companies seek to enhance their information security posture in the cloud:
+          </p>
+          <p>
+            <b><u>Deploy and validate data loss prevention capabilities</u></b>
+          </p> 
+          <p>
+            One of the most important considerations for companies moving to the cloud is deployment and validation of data loss prevention (DLP) capabilities. For any Software-as-a-Service (SaaS) solution — including Office 365, Amazon Web Services, Salesforce or Workday — one of the first steps toward effective DLP is establishing data labeling practices. Ineffective data labeling practices make protection against exfiltration risks almost impossible because DLP solutions rely on regular expressions, or pattern-based searches, to identify and protect against data loss. We advise companies to treat unlabeled documents with the utmost sensitivity and block them from leaving the enterprise by creating stringent DLP policies. This can be achieved via auto quarantine of files that violate these policies.
+          </p>
+          <p>
+            Organizations that maintain sensitive data need to evaluate host-based sensitive data discovery solutions and/or network-based DLP provided by cloud access security broker (CASB) solutions. CASBs provide the ability to inspect all client-to-server traffic in cloud environments to reveal threats or malicious files hidden in Transport Layer Security (TLS) encrypted communications. CASBs also enable system admins to detect unauthorized network calls made from the cloud to malicious command and control (C2) servers. The auditing capability provided by CASB tools can be easily integrated with on-premise enterprise layered defenses. This integration provides a single pane view of the entire enterprise threat protection capability.
+          </p>
+          <p>
+            Large global companies need to effectively protect sensitive data from exfiltration but may lack a complete understanding of the footprint of their various cloud solutions. This makes it all but impossible to achieve the DLP coverage necessary to fully protect the enterprise. Companies can achieve greater visibility into their cloud footprint through effective identity and access management practices such as single sign-on and granular authorization. These controls help companies ensure that sensitive traffic traversing their various cloud solutions is inspected by CASB proxies.
+          </p>
+          <p>
+            Recent security breaches have underlined the risks associated with failure to enforce granular authorization for access to files containing sensitive information. It is critical that companies effectively restrict access to members of authorized groups. When organizations are implementing security policies, system administrators also need to take into consideration enforcement of CRUD (“Create, Read, Update and Delete”) and download capabilities for each group within an organization. Along with this, conditional access must be enforced for contingent staff to ensure access is restricted to devices approved by the organization.
+          </p>  
+          <figure>
+            <img src="{% static "img/blogs/cloud-security-certuscyber-2.jpeg" %}">
+          </figure>
+          <br/>
+          <p>
+            <b><u>Mature identity and access management controls</u></b>
+          </p> 
+          <p>
+            Identity and access management (IAM) capabilities are integral to attaining a mature information security posture in the cloud. As a starting point, companies should be thinking about single-sign on (SSO), access request and certification for corporate and employee-owned devices and privileged access management.
+          </p>
+          <p>
+            A cornerstone principle of effective IAM programs is that security can be achieved and maintained most effectively through centralization. SSO, a mechanism for unifying user authentication across diverse platforms, is one such example of this concept, providing a single pane view into who is authenticating to corporate servers while facilitating more efficient and effective employee onboarding and offboarding. Additionally, SSO provides a foundation for more stringent authentication through enforcement of multi-factor authentication (MFA).
+          </p>
+          <p>
+            In the same vein, companies should also be thinking about an initiative to centralize management of applications from an IAM perspective (e.g. access request and certification and periodic user access reviews). Based on our experiences, such initiatives can advance overall IAM maturity and ensure proper enforcement of security policies for applications and users.
+          </p>
+          <p>
+            We also view privileged access management (PAM) as core to an effective IAM posture. PAM helps organizations restrict and monitor the use of privileged accounts in the cloud, including service accounts, to reduce the risk of privileged credentials being misused by an adversary. We have seen incidents where the privileged credentials of Fortune 100 companies were compromised and misused to plant remote shells throughout the network. These attacks could have been prevented by enforcing more granular IAM policies.
+          </p>
+
+          <p>
+            <b><u>Protect data at-rest and in-transit with strong end-to-end encryption</u></b>
+          </p>
+
+          <p>
+            When devising a cloud security strategy, companies need to determine how to secure data-at-rest and in-transit with strong end-to-end encryption.
+          </p>
+
+          <p>
+            The most critical aspect of securing data-at-rest in the cloud is the protection of secret keys given by cloud service providers. Many companies fail to handle these keys securely. Even at the largest companies, we still see the inadvertent exposure of public keys through entry of the keys’ web addresses into an Internet browser. This common misstep may lead to not only the leakage of the cloud platform’s credentials and configuration, but also a complete takeover of the cloud instance.
+          </p>
+
+          <p>
+            For data-in-transit, most companies are already aware of the benefits of sending data over encrypted channels such as TLS. However, it is important to note that when handling sensitive information, such as healthcare or financial data, it is critical to add another layer of encryption to protect against man-in-the-middle-type attacks. For example, companies might consider encrypting the payload and pinning the TLS certificate.
+          </p>
+
+          <p>
+            <b><u>Perform application security evaluation</u></b>
+          </p>
+
+          <p>
+            With the rapid adoption of agile development methodologies such as DevOps, effective integration of security into an enterprise’s software development lifecycle becomes critical to leveraging the cloud securely. One of the biggest misconceptions with respect to cloud security is the belief that cloud service providers will integrate security controls for applications and databases hosted for the enterprise. In reality, most cloud service providers, including AWS, Microsoft and Google, operate a shared responsibility model whereby enterprises maintain responsibility for: consumer data; application security; identity and access management; network and firewall configurations; client-side configurations; server-side encryption; and data integrity authentications.
+          </p>
+
+          <p>
+            Cloud service providers in turn look after redundancy, storage, database and networking. It therefore becomes vital for enterprises to integrate security and compliance into their existing continuous integration and continuous deployment pipelines.
+          </p>
+
+          <p>
+            To improve the security of cloud applications, companies should first identify security vulnerabilities as early as possible within the SDLC. In practice, this means that companies should be fusing security architecture review and secure code review at the earliest stages of development to drive secure implementation of code. Many security solution vendors have already adopted this approach by giving developers a security arsenal, including training, integrating security practices within the integrated development environment (IDE) and within the continuous integration pipeline. Pitfalls we’re currently seeing include the programming language dependence of security solution vendors despite the plethora of programming languages within the development ecosystems of large enterprises. These tools fail to deliver the same levels of quality across different programming languages. For instance, a large enterprise may leverage both Node.js and Java, with security tools effectively identifying Node.js vulnerabilities while overlooking security risks in Java. Companies facing such challenges need to prioritize the customization of their tools to achieve uniform effectiveness across programming languages. Additionally, companies can leverage benchmarking tools to understand the efficacies of various security solution vendors.
+          </p>
+
+          <p>
+            Evaluating the efficacy of production security tools is also critical to securing cloud applications. We recommend to first initiate a purple team exercise geared toward pressure testing key security controls. This approach allows companies to identify whether attack paths exist that may compromise a company’s cloud instance. To better recognize the benefit organizations can gain from purple teaming, companies need to understand the landscape of production security evaluation options. Red teaming exercises provide an adversary’s view of the company’s security posture, blue teaming exercises provide a defenders’ view, and purple teaming combines both adversary’s and defender’s point of view to offer a comprehensive evaluation of information security risk. We see a trend toward companies seeking to build or enhance purple teaming capabilities, sometimes with the help of external experts. In our experiences, companies can most effectively conduct purple teaming exercises in production by blending manual techniques with automated approaches. This allows companies to lessen downtime resulting from any identified security issues. It is important that companies do not conduct purple teaming exercises in QA environments as this could lessen the validity of the results.
+          </p>
+          <p>
+            Purple team evaluations can help identify security vulnerabilities and business gaps in production, providing visibility to the efficacy of layered defenses such as web application firewalls (WAF), security gateways, security information and event management (SIEM), single-sign on and run-time application self-protection (RASP).
+          </p>
+
+          <p>
+            <b><u>Maintain strong logging and monitoring capabilities</b></u>
+          </p>
+
+          <p>
+            Strong logging and monitoring capabilities are essential for organizations to quickly detect and respond to malicious activity affecting their cloud deployment. Conventionally, security information and event management (SIEM) systems — which provide log collection and analysis — were challenging to install and maintain. Log retention was also very storage intensive. Newer SIEM systems are easier to deploy as result of modular functionality. Storage has also lessened as an issue with enterprises increasingly storing logs in the cloud.
+          </p>
+
+          <p>
+            Business leaders should strive toward using SIEM to achieve a single pane view of attack patterns leveraged against cloud applications and infrastructure. This is achieved through log aggregation from various discovery sources (WAF or RASP). Companies should validate the efficacy of SIEM capability with a view toward creating a continuous feedback loop, whereby the commonalities between attacks feed into changes in the rulesets of layered defenses and/or application code. We see that many companies fail to establish this feedback loop, undermining their ability to protect information in the cloud.
+          </p>
+
+          <p>
+            A steady procession of headlines underscores the reality that even the largest global enterprises continue to struggle with cloud security. Leadership teams must tackle cloud security risks by integrating effective security controls and processes within their continuous integration continuous deployment (CI/CD) pipeline and production environment. Additionally, security teams need to create a continuous feedback loop between non-production and production environments to strengthen their company’s overall security posture.
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="blogroll-sidebar">
+          <div class="blog-recent-posts">
+            <h4>Recent Posts:</h4>
+            <ol>
+              <li>
+                <a href="apple-card/" style="display:block;">Deconstructing Apple Card: A Hacker’s Perspective</a>
+              </li>
+              <li>
+                <a href="citrix/" style="display:block;">Citrix Just Suffered a Massive Data Breach. Here’s How to Protect Your Company from Similar Attacks</a>
+              </li>
+              <li>
+                <a href="medtronic/" style="display:block;">Critical Medtronic heart device flaws show need for Internet of Things (IoT) security</a>
+              </li>              
+              <li>
+                <a href="british-airlines/" style="display:block;">British Airways Data Breach: How Hackers Might Have Gotten in and What Businesses Can Do to Protect Themselves</a>
+              </li>
+              <li>
+                <a href="fintech/" style="display:block;">Cybersecurity: Ten Things Fintech Leaders Need to Know</a>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+

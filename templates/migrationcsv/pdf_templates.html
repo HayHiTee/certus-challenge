@@ -1,0 +1,43 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+      type="text/css"/>
+<section class="section-panel white-panel blog-article">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10">
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="press" role="tabpanel">
+                        <div class="col-sm-10">
+                            <div class="press_header">
+                                {{ object.date_last_edited }}
+                                <span class="author"
+                                      style="color:#404040;padding-left:4px;">{{ object.reviwed_by }}</span>
+                            </div>
+                            <div class="info">
+                                <h3 style="font-size:32px;">
+                                    {{ object.finding_name }}
+                                </h3>
+                                <div class="truncate-text">
+                                    <p><b>Description</b></p>
+                                    <p>{{ object.description }}</p>
+                                    <br/>
+                                </div>
+                                <div class="truncate-text">
+                                    <p><b>Remediation</b></p>
+                                    <p>{{ object.solution }}</p>
+                                    <br/>
+                                </div>
+                                <div class="truncate-text">
+                                    <p><b>Website</b></p>
+                                    <p>{{ object.website }}</p>
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

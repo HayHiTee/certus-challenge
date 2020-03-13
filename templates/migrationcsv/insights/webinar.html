@@ -1,0 +1,33 @@
+{% extends parent_template|default:"migrationcsv/base.html" %}{% load static %}{% block main %}
+<section class="section-panel dark-panel simple-banner-small">
+   <div class="container">
+   </div>
+</section>
+<section id="contact-form" class="section-panel white-panel">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 contact-col">
+        {% if form %}
+          <!-- Form Errors -->
+          {% if form.errors %}
+            <ul class="errors">
+              {% for error in form.errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        <form id="contact_form" action="/webinar/" method="POST">
+          {% csrf_token %}
+          {% for field in form %}
+          <div class="form-group">
+            {{ field.label_tag }} {{ field }}
+          </div>
+          {% endfor %}
+          {% endif %}
+          <input type="submit" name="submit" class="btn btn-primary">
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

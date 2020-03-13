@@ -1,0 +1,198 @@
+{% extends parent_template|default:"migrationcsv/base.html" %}{% load static %}{% block main %}
+<section class="section-panel dark-panel simple-banner-small">
+   <div class="container">
+   </div>
+</section>
+<section class="section-panel white-panel blog-article">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8  blog-header-row">
+        <div class="blog-header">
+          <div class="blog-post-date">
+            May 8, 2019
+          </div>
+          <h3>Deconstructing Apple Card: A Hacker’s Perspective</h3>
+          <br/>
+          <figure>
+            <img src="{% static "img/blogs/apple-card.jpeg" %}">
+          </figure>
+        </div>
+        <div class="blog-entry">
+          <p>Apple Inc. yesterday announced the introduction of Apple Card, a product developed in collaboration with Goldman Sachs and Mastercard,
+            which the company is touting as a “a new kind of credit card” featuring “a new
+            level of privacy and security.”In this
+            article, we unpack the technology behind Apple Card, including its strengths
+            and weaknesses from both a security and privacy perspective.<span
+            style='mso-spacerun:yes'>  </span>The security integrated within Apple Card is
+            novel as a case study for information security professionals tasked with
+            protecting sensitive information.For
+            example, the card lacks certain cardholder data (e.g. Primary Account Number,
+            Expiration Date and CVV2) which is both integral to the function of
+            conventional credit cards and at the same time a weakness.<span
+            style='mso-spacerun:yes'>  </span>Another novelty and strength associated with
+            Apple Card is that it leverages the heightened security of host card emulation
+            (HCE) – better known as secure element (SE) – a software architecture that
+            enables identification and protection of digital cards. Through these features,
+            combined with many other security enhancements, Apple Card proves that it is
+            possible to provide higher levels of security and privacy even on resource
+            constrained devices.</span></p>
+
+            <p><b><u>AppleCard Initialization Process</u></b></p>
+
+            <p>In order to understand Apple Card’s overall security
+            posture, we need to walkthrough the end-to-end flow from card manufacturing to
+            initialization and registration with a mobile device.This provides a foundational understanding of
+            the security controls built into the Apple Card payment flow.</p>
+
+            <p>During the manufacturing process, Apple provisions
+            Mastercard’s public key on the physical card chip, which is signed by the chip
+            manufacturer’s public key and then syncs with Mastercard’s tokenization service,
+            enabling Mastercard to validate the authenticity of their public key.
+            Mastercard’s tokenization service is responsible for maintaining a registry of
+            all trusted chip manufacturers and its certificates.This registry is held in a trust store, which
+            verifies certificates from a trusted Certificate Authority (CA).</p>
+
+            <p>Chip-specific information such as the integrated
+            circuit card (ICC) key pair and certificate are also signed by the chip
+            manufacturer and provisioned on the chip.</p>
+
+            <p>Once the consumer has received the card, <span
+            class=SpellE>Mastercards</span>’ payment applet takes payment information from
+            the issuing bank and securely stores it the SE. Users are prompted for a nonce,
+            or special random number, to validate the user’s authenticity. For successful
+            initialization of the applet, it must validate a unique device PAN signed with <span
+            class=SpellE>Mastercards</span>’ public key using the tokenization API.<br/>
+            </p>
+
+            <p>On a frequent basis, Apple card performs secure key
+            exchange/generation using Application Processing Data Unit (APDU) commands,
+            this secure key generation replenishes encrypted tokens and unique derived
+            keys.</p>
+
+
+            <p>In case of a lost or stolen card, an adversary cannot
+            make any transactions and the user can receive a new token and unique derived
+            keys on their provisioned devices without concern about fraudulent transactions.</p>
+
+            <p>Mastercard’s token enrollment APIs negotiate
+            end-to-end encryption protocols between the secure element and Mastercard’s
+            tokenization service. We speculate that the protocol leverages 3DES, which is
+            then hex encoded and is concatenated with Device Encryption Key (DEK), derived
+            from device key, and the device’s MAC address. Encryption is performed using
+            RSA and gets signed using the ISO 9796. This ensures the key size for both
+            encryption and signature to be 1024 bits.This way, the heavy lifting of encryption is handled by backend servers.
+            Along with that, as there is a device key and MAC involved in the key
+            generation ceremony, there are a few key generation attributes tied to the users’
+            Apple Card. </p>
+
+        <p><b><u>Secure
+        Communication with Mobile Device and Applications</u></b></p>
+
+        <p>Apple Card owners will likely need to enroll the card
+        into their iPhone manually by entering the cardholder’s data into the Passbook
+        application (we speculate some form of card identifier will be provided by mail
+        or on the card itself to facilitate this process). The unique card identifier,
+        or temporary DPAN, will then be combined with <span class=GramE>a</span>
+        owner’s specific key and sent to Goldman Sachs along with their iTunes
+        information such as billing address, full name and phone number over secure
+        encrypted channels. Goldman Sachs would view this information in the clear but
+        Apple asserts that Goldman Sachs will refrain from sharing or selling this data
+        to third parties for marketing or advertising purposes. Using the information
+        submitted from the owner’s iOS device, Goldman Sachs then decides whether to
+        approve before allowing the user to add (or bind) the card to the Passbook app.
+        At Goldman Sachs’ discretion, the bank’s process will include steps for
+        additional validation that the cardholder may need to register the credit card.
+        The account holder may confirm their identity with a one-time code. Once the
+        identity is confirmed, Goldman Sachs will create a DPAN, which is a token-like
+        value based upon the user’s personal account number and the user’s device
+        specific information. The DPAN is returned to the device via a two-way transport
+        layer security (TLS) connection from Goldman Sachs for storage in the iOS
+        device’s SE. The DPAN, stored in the SE, is never stored on Apple Card servers,
+        or backed up to iCloud. In addition, the DPAN is encrypted using the user’s
+        private keys, which Apple does not have access to and so has no ability to
+        decrypt. This clear segregation of keys enables Apple to ensure user privacy is
+        maintained and user spending habits or payment-related information is never shared
+        between the company’s servers.</p>
+
+        <p>For secure payments, the foundational security of Apple’s
+        products rests upon SE,
+        which is a hardware driven, tamper-resistant solution capable of securely
+        hosting payment applets, securely communicating other mobile applications and
+        ensuring confidentiality and key management of sensitive data. The SE embeds
+        into the NFC chip, which is used by Apple Pay at payment terminals. The NFC
+        chip facilitates communication between the terminal and the SE. They
+        key takeaway from the SE integration is a hardware-driven microcontroller that
+        performs all the security checks for sensitive data and is segregated from the
+        rest of the mobile applications. This provides strong cryptographic
+        computational power in a single chip.</p>
+
+        <p><b><u>Authenticating
+        Users to Access Information</u></b></p>
+
+        <p>Only applications created by Apple have access to
+          Apple Card payment information.When the
+          any mobile application is trying to access payment information such as
+          transaction history or making a cash transaction, a call is made to the Apple
+          Card Servers with DPAN information to obtain a timebound nonce. This number,
+          along with other transaction data, is passed over an applet to the SE to
+          generate a payment signature. When the payment signature comes out of the SE,
+          it’s sent to Apple Card Servers over encrypted channels. The authenticity of
+          this transaction is verified through this payment signature and the random
+          number provided by Apple Pay Servers. After successful verification of the
+          payment signature, the user’s request is initiated. If the user wants to view
+          the transaction details, then temporary payment applet access is provided to
+          the Apple-created mobile applications. For sending or receiving payment,
+          encrypted payment transaction information is sent back to Apple Card Servers,
+          which is encrypted using the user’s private key. In case additional user
+          identification is requested, then that information is also handed over to
+          Goldman Sachs via Apple Card servers using the user’s private key
+          encryption.The only caveat is that any
+          user enrolled on that device can make a payment on someone else’s behalf
+          provided they can perform touch or face authentication.</p>
+
+        <p><b><u>Conclusion</u></b></p>
+
+        <p>As shown in this article, foundational security is
+        embedded across the entire payment flow right from manufacturing to successful
+        payment. Broadly, the security takeaways from Apple Card are threefold: First,
+        from an architecture perspective, Apple thought through all the moving parts
+        and managed to achieve security without compromising user experience. Second,
+        rather than introducing a very fragmented ecosystem for payment, they narrowed
+        the players to only Mastercard and Goldman Sachs, which reduces the number of
+        dependencies and overall business risk. Finally, by integrating hardware-based
+        security controls such as tamper resistance and SE, Apple ensured the
+        foundational security of Apple Card is not software-driven, which may have
+        proved more error prone than hardware controls. The only caveat to this
+        approach is that if a bug is found in the hardware, a fix cannot easily be
+        applied.</p>
+
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="blogroll-sidebar">
+          <div class="blog-recent-posts">
+            <h4>Recent Posts:</h4>
+            <ol>
+              <li>
+                <a href="cloud-security/" style="display:block;">Cloud security: What every tech leader needs to know</a>
+              </li>
+              <li>
+                <a href="medtronic/" style="display:block;">Critical Medtronic heart device flaws show need for Internet of Things (IoT) security</a>
+              </li>
+              <li>
+                <a href="citrix/" style="display:block;">Citrix Just Suffered a Massive Data Breach. Here’s How to Protect Your Company from Similar Attacks</a>
+              </li>
+              <li>
+                <a href="british-airlines/" style="display:block;">British Airways Data Breach: How Hackers Might Have Gotten in and What Businesses Can Do to Protect Themselves</a>
+              </li>
+              <li>
+                <a href="fintech/" style="display:block;">Cybersecurity: Ten Things Fintech Leaders Need to Know</a>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
