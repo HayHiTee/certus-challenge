@@ -1,62 +1,92 @@
 {% extends parent_template|default:"migrationcsv/base.html" %}{% load static %}{% block main %}
-<section class="section-panel dark-panel simple-banner-small">
-   <div class="container">
-   </div>
-</section>
-<nav id="press-nav" class="">
-   <div class="container">
-      <ul class="nav nav-tabs" role="tablist">
-         <li class="nav-item active">
-            <a class="nav-link" data-toggle="tab" href="#press" role="tab" aria-expanded="true">Findings</a>
-         </li>
-         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#resources" role="tab" aria-expanded="false">CVSS Score</a>
-         </li>
-         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#resources" role="tab" aria-expanded="false">Test Plan</a>
-         </li>
-         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#resources" role="tab" aria-expanded="false">Methodology</a>
-         </li>
-         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#resources" role="tab" aria-expanded="false">Tools</a>
-         </li>
-      </ul>
-   </div>
-</nav>
+    <section class="section-panel dark-panel simple-banner-small">
+        <div class="container">
+        </div>
+    </section>
+    <nav id="press-nav" class="">
+        <div class="container">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item active">
+                    <a class="nav-link" data-toggle="tab" href="#press" role="tab" aria-expanded="true">Findings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#resources" role="tab" aria-expanded="false">CVSS
+                        Score</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#resources" role="tab" aria-expanded="false">Test
+                        Plan</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#resources" role="tab"
+                       aria-expanded="false">Methodology</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#resources" role="tab" aria-expanded="false">Tools</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-<section class="section-panel white-panel">
-   <div class="container">
-      <div class="row">
-         <div class="col-sm-1"></div>
+    <section class="section-panel white-panel">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-1"></div>
 
-         <div class="col-sm-10">
-         <!-- Tab panes -->
-            <div class="tab-content">
-               {% for findings in object_list %}
-               <div class="tab-pane fade in active" id="press" role="tabpanel">
-                  <div class="row press-item" style="padding: 30px 0;border-bottom: 2px solid #0076FF">
-                  <div class="col-sm-10">
-                     <div class="press_header">
-                        {{ findings.date_last_edited }}
-                        <span class="author" style="color:#404040;padding-left:4px;">{{ findings.reviwed_by }}</span>
-                     </div>
-                     <div class="info">
-                        <h4 style="font-size:32px;"><a href="{% url 'findings-detail' findings.id %}">{{ findings.finding_name }}</a></h4>
-                                        <div class="truncate-text"><p>{{ findings.description }}</p></div>
-                     </div>
-                  </div>
-                  </div>
-               </div>
-               {% empty %}
-               <p>No findings yet.</p>
-               {% endfor %}
+                <div class="col-sm-10">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <form method="post" action="{% url 'download-pdf' %}">
+                            <div class="download-file">
+                                <button id="download-btn-id" class="download-btn" type="submit"><i
+                                        class="fa fa-download"> </i>
+                                    Download
+                                </button>
+                                <span class="pull-right">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="download-format" value="PDF"
+                                               checked> PDF
+                                    </label>
 
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="download-format"
+                                               value="HTML"> HTML
+                                    </label>
+                                        </span>
+
+                            </div>
+                            {% for findings in object_list %}
+                                <div class="tab-pane fade in active" id="press" role="tabpanel">
+                                    <div class="row press-item"
+                                         style="padding: 30px 0;border-bottom: 2px solid #0076FF">
+                                        <div class="col-sm-10">
+                                            <div class="press_header">
+                                                {{ findings.date_last_edited }}
+                                                <span class="pull-right"> <i
+                                                        class="fa fa-download text-primary"> </i> <input type="checkbox"
+                                                                                            name="selected-findings"
+                                                                                            value={{ findings.pk }}></span>
+                                                <span class="author"
+                                                      style="color:#404040;padding-left:4px;">{{ findings.reviwed_by }}</span>
+                                            </div>
+                                            <div class="info">
+                                                <h4 style="font-size:32px;"><a
+                                                        href="{% url 'findings-detail' findings.id %}">{{ findings.finding_name }}</a>
+                                                </h4>
+                                                <div class="truncate-text"><p>{{ findings.description }}</p></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% empty %}
+                                <p>No findings yet.</p>
+                            {% endfor %}
+                        </form>
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
-   </div>
-</section>
+        </div>
+    </section>
 
 
 {% endblock %}

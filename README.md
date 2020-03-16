@@ -65,14 +65,26 @@ Once selected end user should have an option to download selected findings (only
     python manage.py runserver 8000
     ```
 
-8. Log in to [admin](http://127.0.0.1:8000/admin/) with the username and password created in 6. 
 
-9. To Run Test
+8. To Run Test
      ```bash
+    
     python manage.py test
+    
     ```
 
 ### Usage
-* Findings API [documentation](http://127.0.0.1:8000/findings/api/v1/redoc/)
-* Findings API [swagger](http://127.0.0.1:8000/findings/api/v1/docs/)
-* List findings [here](http://127.0.0.1:8000/appsec/findings/)
+1. Log in to [admin](http://127.0.0.1:8000/admin/) with the username and password created in earlier. 
+
+2. For the API [documentation](http://127.0.0.1:8000/findings/api/v1/redoc/) , You need authorization and authentication as a super admin
+    after logging into  [admin](http://127.0.0.1:8000/admin/). The API makes use of token
+
+3. You can get token using POST [here](http://127.0.0.1:8000/findings/auth/token/) with the superuser username and password
+
+4. For every request to the API Pass the following to the header of your request using key-value
+      
+      Authorization = "token (token obtained)"
+
+    * Findings API [documentation](http://127.0.0.1:8000/findings/api/v1/redoc/)
+    * Findings API [swagger](http://127.0.0.1:8000/findings/api/v1/docs/)
+    * List findings [here](http://127.0.0.1:8000/appsec/findings/)

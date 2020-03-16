@@ -1,10 +1,12 @@
 import pdfkit
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.core.exceptions import ValidationError
 from django.http import JsonResponse, Http404, HttpResponseNotFound
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 from django.views import generic
+from django.views.decorators.http import require_POST
 
 from rest_framework.views import APIView
 from rest_framework.parsers import JSONParser
@@ -20,25 +22,27 @@ import os
 from django.conf import settings
 
 
-def html_to_pdf_view(request, pk):
-    download_format = request.GET.get('format', 'PDF').upper()
+@require_POST
+def html_to_pdf_view(request):
+    download_format = request.POST.get('download-format', 'PDF').upper()
+    print(request.POST)
+    selected_findings = request.POST.getlist('selected-findings')
+    print(download_format)
+    print(selected_findings)
     if download_format == "PDF" or download_format == "HTML":
         content_type = "text/html"
-        finding_object = Findings.objects.get(id=pk)
-        output = render_to_string('migrationcsv/pdf_templates.html', {'object': finding_object})
+        finding_object = Findings.objects.filter(Q(id__in=selected_findings))
+        output = render_to_string('migrationcsv/pdf_templates.html', {'object_list': finding_object})
         # convert html to pdf if user requests for pdf
         if download_format == "PDF":
             content_type = 'application/pdf'
             output = pdfkit.from_string(output, False)
         response = HttpResponse(output, content_type=content_type)
-        response['Content-Disposition'] = f'attachment; filename="finding_details.{download_format.lower()}"'
+        response['Content-Disposition'] = f'attachment; filename="finding_list.{download_format.lower()}"'
         return response
     else:
 
         return HttpResponseNotFound('Format Type not Supported')
-
-
-
 
 
 class AppSecView(generic.ListView):

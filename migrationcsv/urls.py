@@ -5,7 +5,7 @@ from migrationcsv.views import html_to_pdf_view
 from . import views
 
 urlpatterns = [
-	path("download/<int:pk>/", html_to_pdf_view, name='download-pdf'),
+	path("download/", html_to_pdf_view, name='download-pdf'),
 	path("migration/", views.MigrationView.as_view(), name="migration"),
 	path("appsec/", views.AppSecView.as_view(), name="appsec view"),
 	path("findings/", views.FindingsListView.as_view(), name="findings list"),
