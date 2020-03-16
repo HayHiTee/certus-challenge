@@ -25,10 +25,8 @@ from django.conf import settings
 @require_POST
 def html_to_pdf_view(request):
     download_format = request.POST.get('download-format', 'PDF').upper()
-    print(request.POST)
     selected_findings = request.POST.getlist('selected-findings')
-    print(download_format)
-    print(selected_findings)
+
     if download_format == "PDF" or download_format == "HTML":
         content_type = "text/html"
         finding_object = Findings.objects.filter(Q(id__in=selected_findings))
