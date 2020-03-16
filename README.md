@@ -74,7 +74,7 @@ Once selected end user should have an option to download selected findings (only
     ```
 
 ### Usage
-1. Log in to [admin](http://127.0.0.1:8000/admin/) with the username and password created in earlier. 
+1. Log in to [admin](http://127.0.0.1:8000/admin/) with the username and password created in superuser earlier. 
 
 2. For the API [documentation](http://127.0.0.1:8000/findings/api/v1/redoc/) , You need authorization and authentication as a super admin
     after logging into  [admin](http://127.0.0.1:8000/admin/). The API makes use of token
